@@ -53,7 +53,7 @@ WORKDIR /home/student
 RUN git clone --branch ns-3.35 https://gitlab.com/nsnam/ns-3-dev.git
 RUN cd ./ns-3-dev/examples && git clone https://github.com/isrm-lab/ns3-labs.git
 RUN cd /home/student/ns-3-dev && \
-	CXXFLAGS="-Wall -O3" ./waf configure --build-profile=debug --enable-examples --enable-tests && \
+	CXXFLAGS="-Wall -O3 -std=c++17" ./waf configure --build-profile=debug --enable-examples --enable-tests && \
 	./waf build -j8
 	
 # We need to define the command to launch when we are going to run the image.
