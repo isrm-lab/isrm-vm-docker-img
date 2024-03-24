@@ -50,12 +50,6 @@ RUN echo 'student:student' | chpasswd
 USER student
 WORKDIR /home/student
 
-# clone repos
-RUN git clone --branch ns-3.41 https://gitlab.com/nsnam/ns-3-dev.git
-RUN cd ./ns-3-dev/examples && git clone https://github.com/isrm-lab/ns3-labs.git
-RUN cd /home/student/ns-3-dev && \
-	./ns3 configure --enable-examples && ./ns3
-	
 # We need to define the command to launch when we are going to run the image.
 # We use the keyword 'CMD' to do that.
 CMD [ "/bin/sh", "./hello.sh" ]
