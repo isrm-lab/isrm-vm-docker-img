@@ -33,6 +33,7 @@ RUN apt update && \
 	apt install -y python3 && \
 	apt install -y python3-pip && \
 	apt install -y python3-matplotlib python3-jupyter-core python3-jupyter-client && \
+	apt install -y jupyter-notebook -y
 	# some ns3 libs
 	apt install -y libgsl-dev && \
 	apt install -y gsl-bin && \
