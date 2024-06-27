@@ -1,5 +1,5 @@
 # DON't use ubuntu 20.04, seems to be a bug and gets stuck when doing apt install
-FROM ubuntu:22.10
+FROM ubuntu:24.04
 
 # script for test
 COPY hello.sh /
@@ -31,14 +31,15 @@ RUN apt update && \
 	# python stuff
 	apt install -y python3 && \
 	apt install -y python3-pip && \
-	pip3 install matplotlib jupyter && \
+	apt install -y python3-matplotlib python3-jupyter-core python3-jupyter-client && \
 	# some ns3 libs
 	apt install -y libgsl-dev && \
 	apt install -y gsl-bin && \
 	apt install -y libgslcblas0 && \
 	apt install -y autoconf cvs bzr unrar && \
-	apt install -y sqlite sqlite3 libsqlite3-dev && \
-	apt install -y libxml2 libxml2-dev
+	apt install -y sqlite3 libsqlite3-dev && \
+	apt install -y libxml2 libxml2-dev && \
+	apt install -y cmake
 
 RUN ln -s ~/.local/bin/jupyter-notebook /usr/bin/jupyter-notebook
 
@@ -49,13 +50,6 @@ RUN echo 'student:student' | chpasswd
 USER student
 WORKDIR /home/student
 
-# clone repos
-RUN git clone --branch ns-3.35 https://gitlab.com/nsnam/ns-3-dev.git
-RUN cd ./ns-3-dev/examples && git clone https://github.com/isrm-lab/ns3-labs.git
-RUN cd /home/student/ns-3-dev && \
-	CXXFLAGS="-Wall -O3 -std=c++17" ./waf configure --build-profile=debug --enable-examples --enable-tests && \
-	./waf build -j8
-	
 # We need to define the command to launch when we are going to run the image.
 # We use the keyword 'CMD' to do that.
 CMD [ "/bin/sh", "./hello.sh" ]
