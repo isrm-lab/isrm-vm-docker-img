@@ -28,6 +28,7 @@ RUN apt update && \
 	apt install -y libxt6 && \
 	apt install -y gnuplot-x11 && \
 	apt install -y tk tcl && \
+	apt install -y tshark && \
 	# python stuff
 	apt install -y python3 && \
 	apt install -y python3-pip && \
