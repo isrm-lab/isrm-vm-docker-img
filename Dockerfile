@@ -27,13 +27,13 @@ RUN apt update && \
 	apt install -y libx11-dev && \
 	apt install -y libxt6 && \
 	apt install -y gnuplot-x11 && \
-	apt install -y tk tcl && \
+	apt install -y tk tcl parallel tmux mc emacs && \
 	apt install -y tshark && \
 	# python stuff
 	apt install -y python3 && \
 	apt install -y python3-pip && \
 	apt install -y python3-matplotlib python3-jupyter-core python3-jupyter-client && \
-	apt install -y jupyter-notebook -y
+	apt install -y python3-ipykernel jupyter-notebook 
 	# some ns3 libs
 	apt install -y libgsl-dev && \
 	apt install -y gsl-bin && \
@@ -42,6 +42,8 @@ RUN apt update && \
 	apt install -y sqlite3 libsqlite3-dev && \
 	apt install -y libxml2 libxml2-dev && \
 	apt install -y cmake
+
+RUN snap install code --classic
 
 RUN ln -s ~/.local/bin/jupyter-notebook /usr/bin/jupyter-notebook
 
